@@ -1,0 +1,91 @@
+body {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+    margin-bottom: 45px;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    font-size: 0.85rem;
+}
+
+/* Contact button styles */
+.footer .btn-outline-primary {
+    border-width: 1px;
+    padding: 0.25rem 0.75rem;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.footer .btn-outline-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(var(--bs-primary-rgb), 0.2);
+}
+
+.footer i {
+    font-size: 0.75rem;
+}
+
+/* Website link styles */
+.footer a[href*="itoutsource360"] {
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.footer a[href*="itoutsource360"]:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* Version badge style */
+.version-badge {
+    background: rgba(13, 110, 253, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    color: #0d6efd !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.version-badge i {
+    font-size: 0.7rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer .row > div {
+        text-align: center !important;
+        margin: 0.25rem 0;
+    }
+    
+    .footer .row {
+        flex-direction: column-reverse;
+    }
+    
+    .footer {
+        padding: 0.75rem 0;
+    }
+
+    .footer .btn-group {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .d-flex.flex-column.flex-md-row {
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+}

@@ -1,0 +1,185 @@
+:root {
+    --primary-color: #36b9cc;
+    --secondary-color: #36b9cc;
+    --accent-color: #36b9cc;
+    --gradient-start: #36b9cc;
+    --gradient-end: #36b9cc;
+}
+
+body {
+    background: linear-gradient(135deg,#e5f0f5 0%,rgb(240, 246, 250) 100%)   !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    flex-direction: column; /* Footer-i aşağıda saxlamaq üçün */
+}
+
+.error-container {
+    max-width: 600px;
+    width: 90%;
+    padding: 2rem;
+    text-align: center;
+    perspective: 1000px;
+    margin-bottom: auto; /* Footer-i aşağıda saxlamaq üçün */
+}
+
+.error-card {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform-style: preserve-3d;
+    animation: cardFloat 3s ease-in-out infinite;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.error-icon {
+    font-size: 64px;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+.error-code {
+    font-size: 96px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: numberFloat 3s ease-in-out infinite;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 1.5rem 0;
+    opacity: 0.8;
+}
+
+.support-text {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.btn-return {
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-return:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: white;
+}
+
+/* Footer Styles */
+.footer {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 0;
+    margin-top: auto; /* Footer-i aşağıda saxlamaq üçün */
+    border-top: 1px solid rgba(54, 185, 204, 0.1);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+}
+
+.footer-copyright-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.footer-copyright-link:hover {
+    color: var(--accent-color);
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.footer-divider {
+    color: #ddd;
+}
+
+.footer-version {
+    background: rgba(54, 185, 204, 0.1);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-10px) rotateX(2deg); }
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes numberFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-divider {
+        display: none;
+    }
+}

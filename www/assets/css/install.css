@@ -1,0 +1,77 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 900px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.progress {
+    height: 5px;
+}
+
+.invalid-feedback {
+    font-size: 80%;
+}
+
+.border-bottom {
+    margin-bottom: 1rem;
+}
+
+h5 {
+    color: #0d6efd;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    padding: 0.5rem 2rem;
+}
+
+.system-info-table {
+    font-size: 0.9rem;
+}
+
+.system-info-table td {
+    padding: 0.5rem;
+    vertical-align: middle;
+}
+
+.system-info-value {
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-error {
+    background-color: #f8d7da;
+    color: #842029;
+}

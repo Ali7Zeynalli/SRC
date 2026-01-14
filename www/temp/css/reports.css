@@ -1,0 +1,152 @@
+/* Reports Page Styles */
+:root {
+    --primary: #0d6efd;
+    --primary-light: rgba(13, 110, 253, 0.1);
+    --secondary: #6c757d;
+    --success: #198754;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #17a2b8;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --white: #fff;
+    --muted: #6c757d;
+}
+
+/* SweetAlert2 Custom Styles */
+.swal-notification {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.swal2-popup {
+    padding: 1.5rem !important;
+    font-size: 0.9rem !important;
+    border-radius: 10px !important;
+}
+
+.swal2-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 0 !important;
+}
+
+.swal2-html-container {
+    font-size: 0.9rem !important;
+    margin: 1rem 0 !important;
+    text-align: left !important;
+}
+
+.swal2-styled.swal2-confirm,
+.swal2-styled.swal2-cancel {
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 6px !important;
+}
+
+/* Custom Card Styles */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background-color: var(--white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.card-footer {
+    background-color: var(--white);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+}
+
+/* Report Generator */
+.list-group-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: var(--light);
+}
+
+.list-group-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Table Styles */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: var(--primary-light);
+}
+
+/* Button Styles */
+.btn-group .btn {
+    border-radius: 6px;
+    margin: 0 2px;
+}
+
+.btn-check:checked + .btn-outline-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-check:checked + .btn-outline-success {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+/* Animation Classes */
+.animate__faster {
+    animation-duration: 0.3s !important;
+}
+
+/* Badge Styles */
+.badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+/* Empty State */
+.text-muted i.fa-2x {
+    opacity: 0.5;
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-wrap: wrap;
+    }
+    
+    .btn-group .btn {
+        margin: 2px;
+    }
+} 

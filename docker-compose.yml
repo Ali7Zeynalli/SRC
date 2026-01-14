@@ -1,0 +1,65 @@
+services:
+  # Apache/PHP service
+  apache:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php-apache
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+      - "${HTTPS_PORT:-8043}:443"
+    volumes:
+      - ./www:/var/www/html
+      - ./apache-config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./certs:/etc/ssl/certs/server
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-ldap_auth}
+      - MYSQL_USER=${MYSQL_USER:-srcs_admin}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-SrcS@2026!Secure}
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  # MySQL service
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-SrcS@2026!Root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ldap_auth}
+      MYSQL_USER: ${MYSQL_USER:-srcs_admin}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-SrcS@2026!Secure}
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - app-network
+
+  # phpMyAdmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: php-myadmin
+    ports:
+      - "${PMA_PORT:-8081}:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${MYSQL_USER:-srcs_admin}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-SrcS@2026!Secure}
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

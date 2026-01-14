@@ -1,0 +1,113 @@
+/* Form styles */
+.form-floating > label {
+    padding-left: 1rem;
+}
+
+.form-control, .form-select {
+    border: 2px solid #e9ecef;
+    padding: 1rem 0.75rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.form-floating > .form-control,
+.form-floating > .form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25;
+}
+
+.form-floating > textarea.form-control {
+    height: calc(8rem + 2px);
+}
+
+/* Card animations */
+.card {
+    transition: all 0.3s ease;
+}
+
+#successCard .fas {
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* Status badge */
+#formStatus .badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+
+
+
+/* Rating styles */
+.rating-input {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+}
+
+.rating-input input {
+    display: none;
+}
+
+.rating-input label {
+    cursor: pointer;
+    color: #dee2e6;
+    font-size: 2rem;
+    transition: all 0.2s ease;
+}
+
+.rating-input label:hover,
+.rating-input label:hover ~ label,
+.rating-input input:checked ~ label {
+    color: #ffc107;
+}
+
+.rating-input label:hover i,
+.rating-input input:checked ~ label i {
+    transform: scale(1.2);
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* Subject select styles */
+#subjectSelect {
+    font-size: 0.95rem;
+}
+
+#subjectSelect optgroup {
+    font-weight: 600;
+    color: var(--bs-primary);
+}
+
+#subjectSelect option {
+    font-weight: normal;
+    color: #444;
+    padding: 4px;
+}
+
+/* Description alert styles */
+#subjectDescription {
+    transition: all 0.3s ease;
+}
+
+#subjectDescription.d-none {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+#subjectDescription:not(.d-none) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert-info {
+    background-color: rgba(var(--bs-info-rgb), 0.1);
+    border-color: rgba(var(--bs-info-rgb), 0.2);
+}

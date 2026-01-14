@@ -1,0 +1,108 @@
+Options -Indexes
+RewriteEngine On
+
+# Set path for error documents with relative URLs (simplifying)
+ErrorDocument 400 /error.php?code=400
+ErrorDocument 401 /error.php?code=401
+ErrorDocument 403 /error.php?code=403
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 500 /error.php?code=500
+ErrorDocument 502 /error.php?code=502
+ErrorDocument 503 /error.php?code=503
+ErrorDocument 504 /error.php?code=504
+ErrorDocument 505 /error.php?code=505
+
+# Block requests with suspicious query strings
+RewriteCond %{QUERY_STRING} \.\. [OR]
+RewriteCond %{QUERY_STRING} \.(bash|git|hg|log|svn|swp|cvs) [NC,OR]
+RewriteCond %{QUERY_STRING} etc/passwd [NC,OR]
+RewriteCond %{QUERY_STRING} boot\.ini [NC,OR]
+RewriteCond %{QUERY_STRING} ftp\: [NC,OR]
+RewriteCond %{QUERY_STRING} http\: [NC,OR]
+RewriteCond %{QUERY_STRING} https\: [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|%3D) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(%0|%A|%B|%C|%D|%E|%F|127\.0).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*('|%27).* [NC]
+RewriteRule .* /error.php?code=403 [F,L]
+
+# Block access to specific file types (modernized)
+<FilesMatch "\.(env|git|htaccess|htpasswd|ini|log|sh|sql|tpl|twig|yml)$">
+    Require all denied
+</FilesMatch>
+
+# Redirect PHP files with trailing slashes or extra characters to clean URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+\.php)/+[^\s]* [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Redirect PHP files with trailing slashes to clean URLs
+RewriteRule ^(.+)\.php/$ $1.php [R=301,L]
+
+# Protect sensitive directories - redirect to error page
+RewriteCond %{REQUEST_URI} ^/config/?$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/api/?$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/logs/?$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/backup/?$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/tmp/?$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/temp/?$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/includes/?$ [NC]
+RewriteRule ^(.*)$ /error.php?code=403 [L,R=302,QSA]
+
+# Add error code to query string for proper handling
+RewriteCond %{ENV:REDIRECT_STATUS} ^([0-9]{3})$
+RewriteRule ^(.*)$ /error.php?code=%1 [L,QSA]
+
+# Protect config directory
+<FilesMatch "^config\.php$">
+    Require all denied
+</FilesMatch>
+
+# Protect logs directory
+<FilesMatch "\.log$">
+    Require all denied
+</FilesMatch>
+
+# Block potential exploit files
+<FilesMatch "\.(cgi|pl|py|sh|bash|exe|dll|jsp|asp|aspx|php\.|php3|php4|php5)$">
+    Require all denied
+</FilesMatch>
+
+# Force HTTPS (uncomment when SSL is configured)
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prevent direct access to PHP files in includes
+RewriteRule ^includes/* - [F,L]
+
+# Block requests containing suspicious user agents or empty user agents
+RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+RewriteCond %{HTTP_USER_AGENT} ^(java|curl|wget).* [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} .*(libwww-perl|curl|wget|python|nikto|sqlmap|scan|vulnerability).* [NC]
+RewriteRule .* /error.php?code=403 [F,L]
+
+# Basic security headers
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Ensure error.php is accessible
+RewriteCond %{REQUEST_URI} !^/error\.php [NC]
+
+# Simplify: Direct non-existent files to error.php with 404 code
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* /error.php?code=404 [L]
+
+# Comprehensive rules for PHP files with extra characters
+# Handle any characters after .php
+RewriteRule ^(.+)\.php.+$ $1.php [R=301,L]
+
+# Handle slash after .php with or without additional characters
+RewriteRule ^(.+)\.php/.+$ $1.php [R=301,L]
+
+# Handle any single character after .php (original rule)
+RewriteRule ^(.+)\.php.(.*) $1.php [R=301,L]
