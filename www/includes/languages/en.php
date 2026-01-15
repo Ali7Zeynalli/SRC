@@ -1370,6 +1370,11 @@ $lang = [
     'color_dark' => 'Dark',
     'confirm_delete_text_warning' => 'This action cannot be undone!',
     'no_cancel' => 'No, cancel',
+    'edit_ticket' => 'Edit Ticket',
+    'delete_ticket' => 'Delete Ticket',
+    'save_changes' => 'Save Changes',
+    'confirm_delete' => 'Are you sure?',
+    'yes_delete' => 'Yes, delete it!',
 ];
 
 return $lang;

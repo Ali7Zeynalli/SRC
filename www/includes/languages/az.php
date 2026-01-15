@@ -1368,8 +1368,13 @@ $lang = [
     'color_warning' => 'Xəbərdarlıq (Sarı)',
     'color_info' => 'Məlumat (Mavi)',
     'color_dark' => 'Qaranlıq',
-    'confirm_delete_text_warning' => 'Bu əməliyyat geri qaytarıla bilməz!',
-    'no_cancel' => 'Xeyr, qeyri et',
+    'confirm_delete_text_warning' => 'Bu əməliyyatı geri qaytarmaq mümkün deyil!',
+    'no_cancel' => 'Xeyr, ləğv et',
+    'edit_ticket' => 'Biletə düzəliş et',
+    'delete_ticket' => 'Bileti sil',
+    'save_changes' => 'Dəyişiklikləri yadda saxla',
+    'confirm_delete' => 'Əminsiniz?',
+    'yes_delete' => 'Bəli, sil!',
 ];
 
 return $lang;

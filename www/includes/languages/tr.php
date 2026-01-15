@@ -1370,6 +1370,11 @@ $lang = [
     'color_dark' => 'Koyu',
     'confirm_delete_text_warning' => 'Bu eylem geri alınamaz!',
     'no_cancel' => 'Hayır, yapma',
+    'edit_ticket' => 'Bilet Düzenle',
+    'delete_ticket' => 'Bilet Sil',
+    'save_changes' => 'Değişiklikleri Kaydet',
+    'confirm_delete' => 'Emin misiniz?',
+    'yes_delete' => 'Evet, sil!',
 ];
 
 return $lang;

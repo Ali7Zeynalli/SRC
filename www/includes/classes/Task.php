@@ -151,5 +151,42 @@ class Task {
         $sql = "DELETE FROM task_categories WHERE id = :id";
         return $this->db->query($sql, [':id' => $id]);
     }
+
+    // Update task
+    public function update($id, $subject, $description, $priority, $categoryId, $actor, $affectedUserDn = null, $affectedUserName = null) {
+        $sql = "UPDATE tasks SET 
+                subject = :subject, 
+                description = :description, 
+                priority = :priority, 
+                category_id = :category_id,
+                affected_user_dn = :affected_user_dn,
+                affected_user_name = :affected_user_name
+                WHERE id = :id";
+                
+        $params = [
+            ':subject' => $subject,
+            ':description' => $description,
+            ':priority' => $priority,
+            ':category_id' => $categoryId,
+            ':affected_user_dn' => $affectedUserDn,
+            ':affected_user_name' => $affectedUserName,
+            ':id' => $id
+        ];
+        
+        $this->db->query($sql, $params);
+        
+        $this->addHistory($id, $actor, 'System', "Task updated by $actor");
+        return true;
+    }
+
+    // Delete task
+    public function delete($id) {
+        // First delete history
+        $this->db->query("DELETE FROM task_history WHERE task_id = :id", [':id' => $id]);
+        
+        // Then delete task
+        $sql = "DELETE FROM tasks WHERE id = :id";
+        return $this->db->query($sql, [':id' => $id]);
+    }
 }
 ?>

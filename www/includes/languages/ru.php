@@ -1370,6 +1370,11 @@ $lang = [
     'color_dark' => 'Темный',
     'confirm_delete_text_warning' => 'Эта операция не может быть отменена!',
     'no_cancel' => 'Нет, не делать',
+    'edit_ticket' => 'Изменить тикет',
+    'delete_ticket' => 'Удалить тикет',
+    'save_changes' => 'Сохранить изменения',
+    'confirm_delete' => 'Вы уверены?',
+    'yes_delete' => 'Да, удалить!',
 ];
 
 return $lang;

@@ -1370,6 +1370,11 @@ $lang = [
     'color_dark' => 'Dunkel',
     'confirm_delete_text_warning' => 'Diese Aktion kann nicht rückgängig gemacht werden!',
     'no_cancel' => 'Nein, nicht machen',
+    'edit_ticket' => 'Ticket bearbeiten',
+    'delete_ticket' => 'Ticket löschen',
+    'save_changes' => 'Änderungen speichern',
+    'confirm_delete' => 'Sind Sie sicher?',
+    'yes_delete' => 'Ja, löschen!',
 ];
 
 return $lang;

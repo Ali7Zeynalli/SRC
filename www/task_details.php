@@ -58,12 +58,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $taskObj->assign($id, $actor, $actor);
     }
     
+    // Edit Task
+    if (isset($_POST['action']) && $_POST['action'] === 'edit_task') {
+        $subject = sanitizeInput($_POST['subject']);
+        $description = sanitizeInput($_POST['description']);
+        $priority = sanitizeInput($_POST['priority']);
+        $category_id = sanitizeInput($_POST['category_id'], 'int');
+        $affected_user_dn = !empty($_POST['affected_user_dn']) ? sanitizeInput($_POST['affected_user_dn']) : null;
+        $affected_user_name = !empty($_POST['affected_user_name']) ? sanitizeInput($_POST['affected_user_name']) : null;
+        
+        $taskObj->update($id, $subject, $description, $priority, $category_id, $actor, $affected_user_dn, $affected_user_name);
+        header("Location: task_details.php?id=$id");
+        exit;
+    }
+
+    // Delete Task
+    if (isset($_POST['action']) && $_POST['action'] === 'delete_task') {
+        $taskObj->delete($id);
+        $_SESSION['flash_success'] = "Ticket #$id deleted successfully."; 
+        header("Location: tasks.php");
+        exit;
+    }
+    
     // Refresh to prevent resubmission
     header("Location: task_details.php?id=$id");
     exit;
 }
 
 $history = $taskObj->getHistory($id, true); // Get all including internal
+$categories = $taskObj->getCategories(); // Fetch categories for edit modal
 
 require_once 'includes/header.php';
 ?>
@@ -307,6 +330,21 @@ require_once 'includes/header.php';
                     </div>
                 </form>
 
+                <!-- Edit / Delete Actions -->
+                 <hr>
+                 <div class="d-grid gap-2">
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editTaskModal">
+                        <i class="fas fa-edit me-2"></i> <?php echo __('edit_ticket'); ?>
+                    </button>
+                    
+                    <form method="POST" class="w-100" id="deleteTaskForm">
+                        <input type="hidden" name="action" value="delete_task">
+                        <button type="button" class="btn btn-outline-danger w-100 text-start" onclick="confirmDeleteTicket()">
+                            <i class="fas fa-trash-alt me-2"></i> <?php echo __('delete_ticket'); ?>
+                        </button>
+                    </form>
+                 </div>
+
                 <!-- Change Status -->
                 <form method="POST">
                     <label class="small text-muted mb-1"><?php echo __('update_status'); ?></label>
@@ -336,3 +374,148 @@ require_once 'includes/header.php';
 
 
 <?php require_once 'includes/footer.php'; ?>
+
+<!-- Edit Task Modal -->
+<div class="modal fade" id="editTaskModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form method="POST">
+            <input type="hidden" name="action" value="edit_task">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><?php echo __('edit_ticket'); ?></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Affected User Search (Edit) -->
+                    <div class="mb-3 position-relative">
+                        <label class="form-label"><?php echo __('affected_user'); ?></label>
+                        <input type="text" class="form-control" id="editAffectedUserSearch" placeholder="<?php echo __('search_user_placeholder'); ?>" autocomplete="off" value="<?php echo htmlspecialchars($task['affected_user_name'] ?? ''); ?>">
+                        <input type="hidden" name="affected_user_dn" id="editAffectedUserDn" value="<?php echo htmlspecialchars($task['affected_user_dn'] ?? ''); ?>">
+                        <input type="hidden" name="affected_user_name" id="editAffectedUserName" value="<?php echo htmlspecialchars($task['affected_user_name'] ?? ''); ?>">
+                        <div id="editUserSearchResults" class="list-group position-absolute w-100 shadow" style="display:none; z-index: 1000; max-height: 200px; overflow-y: auto;"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"><?php echo __('ticket_subject'); ?></label>
+                        <input type="text" class="form-control" name="subject" value="<?php echo htmlspecialchars($task['subject']); ?>" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label"><?php echo __('ticket_category'); ?></label>
+                            <select class="form-select" name="category_id" required>
+                                <?php foreach($categories as $cat): ?>
+                                    <option value="<?php echo $cat['id']; ?>" <?php echo $task['category_id'] == $cat['id'] ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($cat['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label"><?php echo __('ticket_priority'); ?></label>
+                            <select class="form-select" name="priority">
+                                <option value="Low" <?php echo $task['priority'] == 'Low' ? 'selected' : ''; ?>><?php echo __('priority_Low'); ?></option>
+                                <option value="Medium" <?php echo $task['priority'] == 'Medium' ? 'selected' : ''; ?>><?php echo __('priority_Medium'); ?></option>
+                                <option value="High" <?php echo $task['priority'] == 'High' ? 'selected' : ''; ?>><?php echo __('priority_High'); ?></option>
+                                <option value="Critical" <?php echo $task['priority'] == 'Critical' ? 'selected' : ''; ?>><?php echo __('priority_Critical'); ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label"><?php echo __('ticket_description'); ?></label>
+                        <textarea class="form-control" name="description" rows="5" required><?php echo htmlspecialchars($task['description']); ?></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('cancel'); ?></button>
+                    <button type="submit" class="btn btn-primary"><?php echo __('save_changes'); ?></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Edit Modal User Search Logic
+    const editSearchInput = document.getElementById('editAffectedUserSearch');
+    const editResultsDiv = document.getElementById('editUserSearchResults');
+    const editDnInput = document.getElementById('editAffectedUserDn');
+    const editNameInput = document.getElementById('editAffectedUserName');
+    
+    if (editSearchInput) {
+        let debounceTimer;
+        
+        editSearchInput.addEventListener('input', function() {
+            const query = this.value;
+            clearTimeout(debounceTimer);
+            
+            // If cleared manually
+            if (query.length === 0) {
+                editDnInput.value = '';
+                editNameInput.value = '';
+                editResultsDiv.style.display = 'none';
+                return;
+            }
+            
+            if (query.length < 2) {
+                 editResultsDiv.style.display = 'none';
+                 return;
+            }
+            
+            debounceTimer = setTimeout(() => {
+                fetch(`api/search_users.php?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        editResultsDiv.innerHTML = '';
+                        if (data.length > 0) {
+                             editResultsDiv.style.display = 'block';
+                             data.forEach(user => {
+                                 const item = document.createElement('a');
+                                 item.classList.add('list-group-item', 'list-group-item-action');
+                                 item.href = '#';
+                                 item.innerHTML = `<strong>${user.displayName}</strong> <small class='text-muted'>(${user.username})</small>`;
+                                 item.onclick = function(e) {
+                                     e.preventDefault();
+                                     editSearchInput.value = user.username; // Display username or display_name
+                                     editDnInput.value = user.dn;
+                                     editNameInput.value = user.username; // Store samaccountname
+                                     editResultsDiv.style.display = 'none';
+                                 };
+                                 editResultsDiv.appendChild(item);
+                             });
+                        } else {
+                             editResultsDiv.style.display = 'none';
+                        }
+                    })
+                    .catch(err => console.error('Error searching users:', err));
+            }, 300);
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (editSearchInput && !editSearchInput.contains(e.target) && !editResultsDiv.contains(e.target)) {
+                editResultsDiv.style.display = 'none';
+            }
+        });
+    }
+});
+
+function confirmDeleteTicket() {
+    Swal.fire({
+        title: '<?php echo __('confirm_delete'); ?>',
+        text: '<?php echo __('confirm_delete_text_warning'); ?>',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: '<?php echo __('yes_delete'); ?>',
+        cancelButtonText: '<?php echo __('no_cancel'); ?>'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('deleteTaskForm').submit();
+        }
+    });
+}
+</script>
