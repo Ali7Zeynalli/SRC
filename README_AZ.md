@@ -1,5 +1,10 @@
 # S-RCS (Server Reporting and Controlling System)
 
+[![GitHub stars](https://img.shields.io/github/stars/Ali7Zeynalli/SRC?style=social)](https://github.com/Ali7Zeynalli/SRC/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker](https://img.shields.io/badge/Docker-Hazır-2496ED.svg?logo=docker)](https://www.docker.com/)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
+
 ![S-RCS Cover](www/PH/cover.png)
 
 ## 🌟 Təqdimat
