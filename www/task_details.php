@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Delete Task
     if (isset($_POST['action']) && $_POST['action'] === 'delete_task') {
-        $taskObj->delete($id);
+        $taskObj->delete($id, $actor);
         $_SESSION['flash_success'] = "Ticket #$id deleted successfully."; 
         header("Location: tasks.php");
         exit;

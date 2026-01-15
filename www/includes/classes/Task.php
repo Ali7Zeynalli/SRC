@@ -32,6 +32,9 @@ class Task {
         // Log creation
         $this->addHistory($taskId, $createdBy, 'System', "Task created by $createdBy");
         
+        // Log to activity_logs
+        $this->logActivity($createdBy, 'TICKET_CREATE', $affectedUserName, "Created ticket #$taskId: $subject");
+        
         return $taskId;
     }
     
@@ -41,6 +44,10 @@ class Task {
         $this->db->query($sql, [':admin' => $adminUsername, ':id' => $taskId]);
         
         $this->addHistory($taskId, $actor, 'Assignment', "Assigned to $adminUsername");
+        
+        // Log to activity_logs
+        $this->logActivity($actor, 'TICKET_ASSIGN', $adminUsername, "Assigned ticket #$taskId to $adminUsername");
+        
         return true;
     }
     
@@ -50,12 +57,21 @@ class Task {
         $this->db->query($sql, [':status' => $newStatus, ':id' => $taskId]);
         
         $this->addHistory($taskId, $actor, 'StatusChange', "Status changed to $newStatus");
+        
+        // Log to activity_logs
+        $this->logActivity($actor, 'TICKET_STATUS', null, "Changed ticket #$taskId status to $newStatus");
+        
         return true;
     }
     
     // Add comment
     public function addComment($taskId, $username, $message, $isInternal = 0) {
         $this->addHistory($taskId, $username, 'Comment', $message, $isInternal);
+        
+        // Log to activity_logs
+        $commentType = $isInternal ? 'internal note' : 'comment';
+        $this->logActivity($username, 'TICKET_COMMENT', null, "Added $commentType to ticket #$taskId");
+        
         return true;
     }
     
@@ -176,17 +192,47 @@ class Task {
         $this->db->query($sql, $params);
         
         $this->addHistory($id, $actor, 'System', "Task updated by $actor");
+        
+        // Log to activity_logs
+        $this->logActivity($actor, 'TICKET_UPDATE', $affectedUserName, "Updated ticket #$id: $subject");
+        
         return true;
     }
 
     // Delete task
-    public function delete($id) {
+    public function delete($id, $actor = null) {
+        // Get task info before deletion for logging
+        $task = $this->get($id);
+        $subject = $task ? $task['subject'] : "Task #$id";
+        
         // First delete history
         $this->db->query("DELETE FROM task_history WHERE task_id = :id", [':id' => $id]);
         
         // Then delete task
         $sql = "DELETE FROM tasks WHERE id = :id";
-        return $this->db->query($sql, [':id' => $id]);
+        $result = $this->db->query($sql, [':id' => $id]);
+        
+        // Log to activity_logs
+        if ($actor) {
+            $this->logActivity($actor, 'TICKET_DELETE', null, "Deleted ticket: $subject (ID: $id)");
+        }
+        
+        return $result;
+    }
+    
+    // Log activity to activity_logs table
+    private function logActivity($userId, $action, $targetUserId = null, $details = null) {
+        $sql = "INSERT INTO activity_logs (user_id, action, target_user_id, details, ip_address, user_agent) 
+                VALUES (:user_id, :action, :target_user_id, :details, :ip_address, :user_agent)";
+        
+        $this->db->query($sql, [
+            ':user_id' => $userId,
+            ':action' => $action,
+            ':target_user_id' => $targetUserId,
+            ':details' => $details,
+            ':ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+            ':user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? null
+        ]);
     }
 }
 ?>
