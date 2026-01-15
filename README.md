@@ -1,5 +1,7 @@
 # S-RCS (Server Reporting and Controlling System)
 
+![S-RCS Cover](www/PH/cover.png)
+
 ## 🌟 Introduction
 
 **S-RCS** is a comprehensive web-based portal designed to revolutionize Windows Active Directory management. By moving administration from the traditional interface to a streamlined web platform, S-RCS significantly reduces time loss and enhances operational efficiency.

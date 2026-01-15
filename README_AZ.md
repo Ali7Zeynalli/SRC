@@ -1,4 +1,6 @@
-re# S-RCS (Server Reporting and Controlling System)
+# S-RCS (Server Reporting and Controlling System)
+
+![S-RCS Cover](www/PH/cover.png)
 
 ## 🌟 Təqdimat
 
