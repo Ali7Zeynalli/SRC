@@ -1375,6 +1375,7 @@ $lang = [
     'save_changes' => 'Dəyişiklikləri yadda saxla',
     'confirm_delete' => 'Əminsiniz?',
     'yes_delete' => 'Bəli, sil!',
+    'new_ticket' => 'Yeni Bilet',
 ];
 
 return $lang;

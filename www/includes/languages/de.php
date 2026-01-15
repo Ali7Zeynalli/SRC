@@ -1375,6 +1375,7 @@ $lang = [
     'save_changes' => 'Änderungen speichern',
     'confirm_delete' => 'Sind Sie sicher?',
     'yes_delete' => 'Ja, löschen!',
+    'new_ticket' => 'Neues Ticket',
 ];
 
 return $lang;

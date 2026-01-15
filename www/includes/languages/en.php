@@ -1375,6 +1375,7 @@ $lang = [
     'save_changes' => 'Save Changes',
     'confirm_delete' => 'Are you sure?',
     'yes_delete' => 'Yes, delete it!',
+    'new_ticket' => 'New Ticket',
 ];
 
 return $lang;
