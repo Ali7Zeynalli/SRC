@@ -295,6 +295,16 @@ Sistem səviyyəli bütün konfiqurasiyalar buradan idarə olunur:
 
 ---
 
+## 🌐 Uzaqdan Giriş Həlli
+
+> **💡 S-RCS-i istənilən yerdən idarə etmək istəyirsiniz?**
+> 
+> **[NovusGate](https://github.com/Ali7Zeynalli/NovusGate)** — WireGuard® üzərində qurulmuş, özünüz host etdiyiniz VPN həllimizi istifadə edin. Evdən, səfərdən və ya uzaq ofislərdən S-RCS-ə **statik IP və port yönləndirməsi olmadan** təhlükəsiz qoşulun.
+> 
+> 👉 **[Uzaqdan Giriş Təlimatına Bax](REMOTE_ACCESS_AZ.md)**
+
+---
+
 ### ⚠️ Lisenziya və İmtina (Disclaimer)
 
 **© 2025 Əli Zeynallı. Bütün Hüquqlar Qorunur.**
