@@ -531,7 +531,7 @@ try {
                 'installed' => true,
                 'first_login' => true,
                 'date' => date('Y-m-d H:i:s'),
-                'version' => '1.2.0',
+                'version' => '1.3.0',
                 'last_update' => date('Y-m-d H:i:s'),
                 'installer' => $input['admin_username'],
                 'install_hash' => hash('sha256', implode('|', [
@@ -628,7 +628,7 @@ try {
             // Create .installed file
             file_put_contents(__DIR__ . '/config/.installed', json_encode([
                 'date' => date('Y-m-d H:i:s'),
-                'version' => '1.5.0',
+                'version' => '1.3.0',
                 'license_key' => $license_key,
                 'server_info' => [
                     'hostname' => gethostname(),
@@ -642,7 +642,7 @@ try {
             $installation_details = [
                 'success' => true,
                 'message' => 'Installation completed successfully',
-                'version' => '1.5.0',
+                'version' => '1.3.0',
                 'license_key' => $license_key,
                 'date' => date('Y-m-d H:i:s'),
                 'admin_username' => $input['admin_username'],

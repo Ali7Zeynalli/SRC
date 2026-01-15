@@ -40,7 +40,7 @@ function updateConfig($data) {
     // Adding installation information
     $current_config['installation'] = [
         'date' => date('Y-m-d H:i:s'),
-        'version' => '1.0.0',
+        'version' => '1.3.0',
         'installed' => true,
         'installer' => $data['admin_username'] ?? 'unknown',
         'install_type' => 'fresh_install',

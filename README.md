@@ -11,6 +11,9 @@ The system is built on a core philosophy of **speed and simplicity**: virtually 
 - **"3-Click" Efficiency**: Optimized UX design ensures rapid execution of tasks.
 - **Centralized Management**: Handle User creation, Group management, OU structuring, and movements from a single dashboard.
 
+### 🆕 What's New in v1.3.0
+> 🎫 **Task Management (Helpdesk)** - Full IT ticketing system with AD integration, audit logging, and status workflows. [See Changelog](CHANGELOG.md)
+
 ## 🚀 Key Features
 
 *   **🌍 Multi-language Support**: The platform is fully multilingual, allowing administrators to work in their preferred language for better accessibility and ease of use.

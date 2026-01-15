@@ -11,6 +11,9 @@ Sistemin təməlində **sürət və sadəlik** fəlsəfəsi dayanır: demək ola
 - **"3-Klik" Effektivliyi**: Optimallaşdırılmış İstifadəçi Təcrübəsi (UX) dizaynı tapşırıqların ildırım sürəti ilə icrasını təmin edir.
 - **Mərkəzləşdirilmiş İdarəetmə**: İstifadəçi yaradılması, Qrup idarəçiliyi, OU strukturu və yerdəyişmələri (Move) tək bir paneldən idarə edilir.
 
+### 🆕 v1.3.0-da Yeniliklər
+> 🎫 **Tapşırıq İdarəetməsi (Helpdesk)** - AD inteqrasiyası, audit loglama və status iş axınları ilə tam İT bilet sistemi. [Dəyişiklik Jurnalına Bax](CHANGELOG_AZ.md)
+
 ## 🚀 Əsas Xüsusiyyətlər
 
 *   **🌍 Çoxdilli Dəstək**: Platforma tamamilə çoxdillidir. İnzibatçılar daha rahat işləmək üçün interfeysi istədikləri dilə (məsələn, İngilis, Azərbaycan) keçirə bilərlər.
