@@ -39,6 +39,19 @@
                     <span><?php echo __('computers'); ?></span>
                 </a>
             </li>
+        </ul>
+
+     <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link <?php echo $activePage === 'gpo' ? 'active' : ''; ?>" href="gpo.php">
+                    <i class="fas fa-shield-alt"></i>
+                    <span><?php echo __('group_policy'); ?></span>
+                </a>
+            </li>
+        </ul>
+
+
+        <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link <?php echo $activePage === 'tasks' ? 'active' : ''; ?>" href="tasks.php">
                     <i class="fas fa-ticket-alt"></i>
@@ -47,14 +60,7 @@
             </li>
         </ul>
 
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link <?php echo $activePage === 'gpo' ? 'active' : ''; ?>" href="gpo.php">
-                    <i class="fas fa-shield-alt"></i>
-                    <span><?php echo __('group_policy'); ?></span>
-                </a>
-            </li>
-        </ul>
+   
 
         <ul class="nav flex-column">
             <li class="nav-item">

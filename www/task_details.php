@@ -52,42 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // AD Actions Handler
-    if (isset($_POST['ad_action'])) {
-        try {
-            $ldap_conn = getLDAPConnection();
-            $targetUser = $task['affected_user_name']; // Use the affected user from the task
-            
-            if (empty($targetUser)) {
-                throw new Exception("No affected user linked to this ticket.");
-            }
 
-            if ($_POST['ad_action'] === 'unlock_user') {
-                if (unlockUser($ldap_conn, $targetUser)) {
-                    $taskObj->addComment($id, 'System', "Unlocked AD account for user: $targetUser", 1);
-                    $success_msg = "User account unlocked successfully.";
-                }
-            } elseif ($_POST['ad_action'] === 'reset_password') {
-                $newPass = $_POST['new_password'];
-                // Validate complexity
-                $complexity = validatePasswordComplexity($newPass);
-                if ($complexity !== true) {
-                    throw new Exception($complexity);
-                }
-                
-                if (resetUserPassword($ldap_conn, $targetUser, $newPass)) {
-                    $taskObj->addComment($id, 'System', "Reset password for user: $targetUser", 1);
-                    $success_msg = "Password reset successfully.";
-                    // Clear Kerberos cache if possible (helper function exists)
-                    if (function_exists('clearKerberosCache')) {
-                        clearKerberosCache($targetUser);
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            $error_msg = $e->getMessage();
-        }
-    }
     
     if (isset($_POST['assign_self'])) {
         $taskObj->assign($id, $actor, $actor);
@@ -257,38 +222,67 @@ require_once 'includes/header.php';
             </div>
             <div class="card-body">
                             <!-- Affected User -->
-                             <?php if (!empty($task['affected_user_name'])): ?>
+                            <?php if (!empty($task['affected_user_name'])): ?>
                             <div class="mb-3">
                                 <label class="small text-muted mb-1"><?php echo __('affected_user'); ?></label>
-                                <div class="d-flex align-items-center p-2 border rounded bg-light">
-                                    <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-weight-bold text-dark"><?php echo htmlspecialchars($task['affected_user_name']); ?></div>
-                                        <?php if(!empty($task['affected_user_dn'])): ?>
-                                            <small class="text-muted" style="font-size: 0.7em;"><?php echo htmlspecialchars($task['affected_user_dn']); ?></small>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- AD Actions -->
-                            <hr>
-                            <h6 class="font-weight-bold text-primary mb-3"><?php echo __('ad_actions'); ?></h6>
-                            <div class="d-grid gap-2">
-                                <form method="POST" onsubmit="return confirm('<?php echo __('confirm_unlock'); ?>');">
-                                    <input type="hidden" name="ad_action" value="unlock_user">
-                                    <button type="submit" class="btn btn-outline-warning w-100 text-start">
-                                        <i class="fas fa-unlock me-2"></i> <?php echo __('unlock_user'); ?>
-                                    </button>
-                                </form>
+                                <?php 
+                                $affectedInfo = null;
+                                try {
+                                    $affectedInfo = getUserDetails($ldap_conn, $task['affected_user_name']);
+                                } catch (Exception $e) {
+                                    // Fallback to basic info if fetch fails
+                                }
+                                ?>
                                 
-                                <button type="button" class="btn btn-outline-danger w-100 text-start" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
-                                    <i class="fas fa-key me-2"></i> <?php echo __('reset_password'); ?>
-                                </button>
+                                <?php if ($affectedInfo): ?>
+                                    <div class="card bg-light border-left-info shadow-sm">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="font-weight-bold text-dark"><?php echo htmlspecialchars($affectedInfo['displayName']); ?></div>
+                                                    <div class="small text-muted">@<?php echo htmlspecialchars($affectedInfo['username']); ?></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="small">
+                                                <div class="mb-1">
+                                                    <i class="fas fa-envelope text-gray-500 me-2 w-20"></i>
+                                                    <?php echo htmlspecialchars($affectedInfo['email'] ?: '-'); ?>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <i class="fas fa-sitemap text-gray-500 me-2 w-20"></i>
+                                                    <span class="text-muted"><?php echo htmlspecialchars($affectedInfo['ou']); ?></span>
+                                                </div>
+                                                <div class="mb-1">
+                                                    <i class="fas fa-users text-gray-500 me-2 w-20"></i>
+                                                    <span class="text-truncate d-inline-block" style="max-width: 250px; vertical-align: top;" title="<?php echo htmlspecialchars($affectedInfo['groups']); ?>">
+                                                        <?php echo htmlspecialchars($affectedInfo['groups'] ?: '-'); ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <!-- Fallback View -->
+                                    <div class="d-flex align-items-center p-2 border rounded bg-light">
+                                        <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-weight-bold text-dark"><?php echo htmlspecialchars($task['affected_user_name']); ?></div>
+                                            <?php if(!empty($task['affected_user_dn'])): ?>
+                                                <small class="text-muted" style="font-size: 0.7em;"><?php echo htmlspecialchars($task['affected_user_dn']); ?></small>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <?php endif; ?>
+                            
+
 
                             <!-- Assign User -->
                              <form method="POST" class="mb-3 mt-3">
@@ -339,30 +333,6 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<!-- Reset Password Modal -->
-<div class="modal fade" id="resetPasswordModal" tabindex="-1">
-    <div class="modal-dialog">
-        <form method="POST">
-            <input type="hidden" name="ad_action" value="reset_password">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><?php echo __('reset_password'); ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-muted"><?php echo __('reset_password_desc'); ?> <strong><?php echo htmlspecialchars($task['affected_user_name'] ?? ''); ?></strong></p>
-                    <div class="mb-3">
-                        <label class="form-label"><?php echo __('new_password'); ?></label>
-                        <input type="password" class="form-control" name="new_password" required minlength="8">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo __('cancel'); ?></button>
-                    <button type="submit" class="btn btn-danger"><?php echo __('reset_password'); ?></button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+
 
 <?php require_once 'includes/footer.php'; ?>
