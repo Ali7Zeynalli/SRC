@@ -8,6 +8,7 @@
 
 session_start();
 require_once(__DIR__ . '/../includes/functions.php');
+require_once(__DIR__ . '/../includes/classes/Task.php');
 
 header('Content-Type: application/json');
 
@@ -119,12 +120,22 @@ try {
         'workstations' => $workstation_computers
     ];
 
+    // Get Task Stats
+    try {
+        $taskObj = new Task();
+        $taskStats = $taskObj->getStats();
+    } catch (Exception $e) {
+        $taskStats = ['total' => 0, 'open' => 0, 'unassigned' => 0];
+    }
+
+
     echo json_encode([
         'success' => true,
         'stats' => [
             'users' => $userStats,
             'groups' => $groupStats,
-            'computers' => $computerStats
+            'computers' => $computerStats,
+            'tasks' => $taskStats
         ]
     ]);
 

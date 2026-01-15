@@ -39,6 +39,12 @@
                     <span><?php echo __('computers'); ?></span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link <?php echo $activePage === 'tasks' ? 'active' : ''; ?>" href="tasks.php">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span><?php echo __('helpdesk_tasks'); ?></span>
+                </a>
+            </li>
         </ul>
 
         <ul class="nav flex-column">

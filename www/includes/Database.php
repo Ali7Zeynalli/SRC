@@ -99,6 +99,10 @@ class Database {
         return $this->connected;
     }
 
+    public function lastInsertId() {
+        return $this->pdo->lastInsertId();
+    }
+
     // Prevent cloning of the instance
     private function __clone() {}
 

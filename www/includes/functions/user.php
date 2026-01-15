@@ -937,3 +937,98 @@ function determineUserAccountControl($options) {
     error_log("Final UAC value: " . $uac);
     return $uac;
 }
+
+/**
+ * Get all users who are members of the allowed groups (potential assignees)
+ * @param resource $ldap_conn LDAP Connection
+ * @return array List of users
+ */
+function getPotentialAssignees($ldap_conn) {
+    try {
+        $config = require(getConfigPath());
+        $allowed_groups = $config['ad_settings']['allowed_groups'];
+        $base_dn = $config['ad_settings']['base_dn'];
+        
+        $assignees = [];
+        $seen_usernames = [];
+        
+        foreach ($allowed_groups as $group_name) {
+            // Find group DN first
+            $group_filter = "(&(objectClass=group)(cn=" . ldap_escape($group_name, "", LDAP_ESCAPE_FILTER) . "))";
+            $group_result = ldap_search($ldap_conn, $base_dn, $group_filter, ['distinguishedName']);
+            
+            if (!$group_result) continue;
+            
+            $group_entries = ldap_get_entries($ldap_conn, $group_result);
+            
+            if ($group_entries['count'] == 0) continue;
+            
+            $group_dn = $group_entries[0]['distinguishedname'][0];
+            
+            // Find users in this group (including nested)
+            $user_filter = "(&(objectClass=user)(objectCategory=person)(memberOf:1.2.840.113556.1.4.1941:=" . ldap_escape($group_dn, "", LDAP_ESCAPE_FILTER) . "))";
+            $user_result = ldap_search($ldap_conn, $base_dn, $user_filter, ['sAMAccountName', 'displayName']);
+             
+            if (!$user_result) continue;
+
+            $user_entries = ldap_get_entries($ldap_conn, $user_result);
+            
+            for ($i = 0; $i < $user_entries['count']; $i++) {
+                $username = $user_entries[$i]['samaccountname'][0];
+                
+                if (!in_array($username, $seen_usernames)) {
+                    $assignees[] = [
+                        'username' => $username,
+                        'display_name' => $user_entries[$i]['displayname'][0] ?? $username
+                    ];
+                    $seen_usernames[] = $username;
+                }
+            }
+        }
+        
+        // Sort by display name
+        usort($assignees, function($a, $b) {
+            return strcasecmp($a['display_name'], $b['display_name']);
+        });
+        
+        return $assignees;
+        
+    } catch (Exception $e) {
+        error_log("Error getting potential assignees: " . $e->getMessage());
+        return [];
+    }
+}
+
+// Reset User Password
+function resetUserPassword($ldap_conn, $username, $newPassword) {
+    try {
+        $config = require(getConfigPath());
+        $base_dn = $config['ad_settings']['base_dn'];
+
+        // Find user DN
+        $result = ldap_search($ldap_conn, $base_dn, "(sAMAccountName=" . ldap_escape($username, "", LDAP_ESCAPE_FILTER) . ")");
+        if (!$result) throw new Exception("User search failed");
+        
+        $entries = ldap_get_entries($ldap_conn, $result);
+        if ($entries['count'] == 0) throw new Exception("User not found");
+        
+        $user_dn = $entries[0]['distinguishedname'][0];
+        
+        // Encode password
+        $encodedPwd = encodePassword($newPassword);
+        
+        // Modify password
+        $entry = [
+            'unicodePwd' => $encodedPwd
+        ];
+        
+        if (!ldap_mod_replace($ldap_conn, $user_dn, $entry)) {
+            throw new Exception("LDAP Error: " . ldap_error($ldap_conn));
+        }
+        
+        return true;
+        
+    } catch (Exception $e) {
+        throw new Exception($e->getMessage());
+    }
+}

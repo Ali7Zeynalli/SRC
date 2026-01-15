@@ -41,9 +41,55 @@ try {
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2"><?php echo __('dashboard_title'); ?></h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="tasks.php" class="btn btn-sm btn-primary me-2">
+                            <i class="fas fa-plus me-1"></i> <?php echo __('new_ticket'); ?>
+                        </a>
                         <button type="button" class="btn btn-sm btn-outline-secondary" id="refreshStats">
                             <i class="fas fa-sync-alt me-1"></i> <?php echo __('refresh'); ?>
                         </button>
+                    </div>
+                </div>
+
+                <!-- Helpdesk Stats Row -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100 border-start border-4 border-primary">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted text-uppercase small font-weight-bold mb-1"><?php echo __('total_tickets'); ?></h6>
+                                        <h3 class="font-weight-bold mb-0 text-primary" id="taskTotal">-</h3>
+                                    </div>
+                                    <div class="text-primary opacity-50"><i class="fas fa-ticket-alt fa-2x"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100 border-start border-4 border-danger">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted text-uppercase small font-weight-bold mb-1"><?php echo __('open_unresolved'); ?></h6>
+                                        <h3 class="font-weight-bold mb-0 text-danger" id="taskOpen">-</h3>
+                                    </div>
+                                    <div class="text-danger opacity-50"><i class="fas fa-exclamation-circle fa-2x"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100 border-start border-4 border-warning">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-muted text-uppercase small font-weight-bold mb-1"><?php echo __('unassigned'); ?></h6>
+                                        <h3 class="font-weight-bold mb-0 text-warning" id="taskUnassigned">-</h3>
+                                    </div>
+                                    <div class="text-warning opacity-50"><i class="fas fa-user-clock fa-2x"></i></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -460,6 +506,12 @@ function updateStatCards(stats) {
     updateElement('totalComputers', computerStats.total || 0);
     updateElement('serverComputers', computerStats.servers || 0);
     updateElement('workstationComputers', computerStats.workstations || 0);
+
+    // Task Statistics
+    const taskStats = stats.tasks || {};
+    updateElement('taskTotal', taskStats.total || 0);
+    updateElement('taskOpen', taskStats.open || 0);
+    updateElement('taskUnassigned', taskStats.unassigned || 0);
 
     // Update charts
     updateCharts(stats);
