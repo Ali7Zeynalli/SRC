@@ -162,6 +162,29 @@ Gain visibility into your Group Policy Objects to ensure compliance and security
 | ![GPO List](www/PH/21.png) | ![GPO Settings](www/PH/22.png) |
 | *Inventory of all policies* | *Deep dive into policy settings* |
 
+## 🎫 Task Management (Helpdesk)
+
+A fully integrated IT helpdesk and ticketing system to track, manage, and resolve internal support requests.
+
+### Ticket Lifecycle
+*   **Create Tickets**: Quickly log new support requests with subject, category, priority, and affected user.
+*   **Assign & Track**: Assign tickets to administrators and track progress through status updates.
+*   **Edit & Delete**: Modify ticket details or remove completed/invalid tickets with full audit trail.
+*   **Comments & Notes**: Add public replies or internal notes for team collaboration.
+
+![Task Management Dashboard](www/PH/30.png)
+
+### Key Features
+*   **Affected User Integration**: Link tickets directly to AD users for quick context and actions.
+*   **Category Management**: Organize tickets by customizable categories (Hardware, Software, Network, etc.).
+*   **Status Workflow**: Track tickets through New → Assigned → In Progress → Resolved → Closed.
+*   **Full Audit Logging**: Every action (create, edit, delete, assign, comment) is logged to Activity Logs.
+
+| **Create Ticket** | **Ticket Details** |
+| :---: | :---: |
+| ![Create New Ticket](www/PH/31.png) | ![Ticket Details](www/PH/32.png) |
+| *Log new support requests* | *View history & manage actions* |
+
 ## 📊 Reporting & Analytics
 
 Turn data into actionable insights with powerful one-click reporting.

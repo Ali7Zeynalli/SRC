@@ -162,6 +162,29 @@ Təhlükəsizlik və uyğunluq qaydalarına nəzarət edin.
 | ![GPO List](www/PH/21.png) | ![GPO Settings](www/PH/22.png) |
 | *Bütün siyasətlər* | *Dərin analiz* |
 
+## 🎫 Tapşırıq İdarəetməsi (Helpdesk)
+
+Daxili dəstək sorğularını izləmək, idarə etmək və həll etmək üçün tam inteqrasiya olunmuş İT Helpdesk və bilet sistemi.
+
+### Bilet Həyat Dövrü
+*   **Bilet Yarat**: Mövzu, kateqoriya, prioritet və təsirlənən istifadəçi ilə yeni dəstək sorğuları qeyd edin.
+*   **Təyin Et və İzlə**: Biletləri administratorlara təyin edin və status yeniləmələri vasitəsilə irəliləyişi izləyin.
+*   **Redaktə Et və Sil**: Tam audit izi ilə bilet detallarını dəyişdirin və ya tamamlanmış/yanlış biletləri silin.
+*   **Şərhlər və Qeydlər**: Komanda əməkdaşlığı üçün ictimai cavablar və ya daxili qeydlər əlavə edin.
+
+![Tapşırıq İdarəetmə Paneli](www/PH/30.png)
+
+### Əsas Xüsusiyyətlər
+*   **Təsirlənən İstifadəçi İnteqrasiyası**: Biletləri birbaşa AD istifadəçilərinə bağlayın.
+*   **Kateqoriya İdarəetməsi**: Biletləri fərdiləşdirilə bilən kateqoriyalar (Hardware, Software, Network və s.) üzrə təşkil edin.
+*   **Status İş Axını**: Biletləri Yeni → Təyin Edilmiş → Davam Edir → Həll Edildi → Bağlandı olaraq izləyin.
+*   **Tam Audit Loglama**: Hər əməliyyat (yaratma, redaktə, silmə, təyin etmə, şərh) Activity Logs-a yazılır.
+
+| **Bilet Yarat** | **Bilet Detalları** |
+| :---: | :---: |
+| ![Yeni Bilet Yarat](www/PH/31.png) | ![Bilet Detalları](www/PH/32.png) |
+| *Yeni dəstək sorğuları qeydə al* | *Tarixçəyə bax və əməliyyatları idarə et* |
+
 ## 📊 Hesabatlılıq və Analitika (Reporting)
 
 Məlumatları faydalı hesabatlara çevirin.
