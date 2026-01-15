@@ -27,7 +27,7 @@ The system is built on a core philosophy of **speed and simplicity**: virtually 
 Get S-RCS running securely in your environment with a few simple commands.
 
 ### 1. Prerequisites
-- **Docker & Docker Compose** installed.
+- **Docker & Docker Compose** installed on your server.
 - Network access to your Active Directory Domain Controller.
 - **Active Directory Configuration**:
     - **🔥 Firewall**: Ensure **Port 636 (LDAPS)** is OPEN on the Domain Controller.
@@ -37,15 +37,67 @@ Get S-RCS running securely in your environment with a few simple commands.
         - **Certification Authority Web Enrollment**
     - *Note: Without these, the secure LDAPS connection will fail.*
 
-### 2. Deployment
-Clone the repository and start the containers:
+### 2. Environment Configuration
+
+Before deployment, configure your environment by editing the `.env` file in the project root:
+
 ```bash
+# MySQL Database Settings
+MYSQL_ROOT_PASSWORD=YourSecureRootPassword
+MYSQL_DATABASE=ldap_auth
+MYSQL_USER=srcs_admin
+MYSQL_PASSWORD=YourSecurePassword
+
+# MySQL Port
+MYSQL_PORT=3306
+
+# Web Server Ports
+HTTP_PORT=8080
+HTTPS_PORT=8043
+
+# phpMyAdmin Port
+PMA_PORT=8081
+```
+
+> [!IMPORTANT]
+> **Security Notice**: Change the default passwords before deployment!
+> - `MYSQL_ROOT_PASSWORD` - MySQL root user password
+> - `MYSQL_PASSWORD` - Application database password
+> - These credentials will be used during the installation wizard
+
+### 3. Deployment
+
+Clone the repository and start the containers:
+
+```bash
+# Clone the repository
+git clone https://github.com/Ali7Zeynalli/S-RCS.git
+cd S-RCS
+
+# Edit environment file (REQUIRED)
+# nano .env  OR  notepad .env
+
+# Build and start containers
 docker-compose up -d --build
 ```
+
 *The system will initialize typically within 2 minutes.*
 
-### 3. Visual Installation Wizard
-Once the containers are running, navigate to `https://localhost:8080` (or your configured port). The comprehensive installation wizard will guide you through the setup process:
+### 4. Access Points
+
+After deployment, access the system via:
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| **S-RCS** | `https://localhost:8043` | Main application (HTTPS) |
+| **S-RCS** | `http://localhost:8080` | Main application (HTTP) |
+| **phpMyAdmin** | `http://localhost:8081` | Database management |
+
+> [!NOTE]
+> Replace `localhost` with your server IP for remote access.
+
+### 5. Visual Installation Wizard
+Once the containers are running, navigate to `https://localhost:8043` (or your configured port). The comprehensive installation wizard will guide you through the setup process:
 
 | **1. Welcome & License** | **2. System Requirements** |
 | :---: | :---: |

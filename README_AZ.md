@@ -37,15 +37,67 @@ S-RCS sistemini mühitinizdə işə salmaq üçün aşağıdakı sadə addımlar
         - **Certification Authority Web Enrollment**
     - *Qeyd: Bu şərtlər ödənməzsə, təhlükəsiz LDAPS bağlantısı qurula bilməz və sistem işləməyəcək.*
 
-### 2. İşə Salma (Deployment)
-Repozitoriyanı klonlayın və konteynerləri işə salın:
+### 2. Mühit Konfiqurasiyası
+
+Quraşdırmadan əvvəl, layihə kökündəki `.env` faylını redaktə edərək mühitinizi konfiqurasiya edin:
+
 ```bash
+# MySQL Verilənlər Bazası Tənzimləmələri
+MYSQL_ROOT_PASSWORD=SizinTəhlükəsizRootŞifrəniz
+MYSQL_DATABASE=ldap_auth
+MYSQL_USER=srcs_admin
+MYSQL_PASSWORD=SizinTəhlükəsizŞifrəniz
+
+# MySQL Portu
+MYSQL_PORT=3306
+
+# Veb Server Portları
+HTTP_PORT=8080
+HTTPS_PORT=8043
+
+# phpMyAdmin Portu
+PMA_PORT=8081
+```
+
+> [!IMPORTANT]
+> **Təhlükəsizlik Xəbərdarlığı**: Quraşdırmadan əvvəl standart şifrələri dəyişdirin!
+> - `MYSQL_ROOT_PASSWORD` - MySQL root istifadəçi şifrəsi
+> - `MYSQL_PASSWORD` - Tətbiq verilənlər bazası şifrəsi
+> - Bu məlumatlar quraşdırma sihirbazında istifadə olunacaq
+
+### 3. İşə Salma (Deployment)
+
+Repozitoriyanı klonlayın və konteynerləri işə salın:
+
+```bash
+# Repozitoriyanı klonlayın
+git clone https://github.com/Ali7Zeynalli/S-RCS.git
+cd S-RCS
+
+# Mühit faylını redaktə edin (VACİB)
+# nano .env  VƏ YA  notepad .env
+
+# Konteynerləri qurun və işə salın
 docker-compose up -d --build
 ```
+
 *Sistem avtomatik konfiqurasiya olunacaq və təxminən 2 dəqiqə ərzində hazır olacaq.*
 
-### 3. Vizuallaşdırılmış Quraşdırma Sihirbazı
-Konteynerlər işə düşdükdən sonra brauzerinizdə `https://localhost:8080` (və ya təyin etdiyiniz IP/port) ünvanına daxil olun. Sizi qarşılayan quraşdırma sihirbazı (Installation Wizard) aşağıdakı addımlarla kömək edəcək:
+### 4. Giriş Nöqtələri
+
+Quraşdırmadan sonra sistemə aşağıdakı ünvanlardan daxil olun:
+
+| Xidmət | URL | Təsvir |
+|--------|-----|--------|
+| **S-RCS** | `https://localhost:8043` | Əsas tətbiq (HTTPS) |
+| **S-RCS** | `http://localhost:8080` | Əsas tətbiq (HTTP) |
+| **phpMyAdmin** | `http://localhost:8081` | Verilənlər bazası idarəetməsi |
+
+> [!NOTE]
+> Uzaqdan giriş üçün `localhost`-u server IP-si ilə əvəz edin.
+
+### 5. Vizuallaşdırılmış Quraşdırma Sihirbazı
+Konteynerlər işə düşdükdən sonra brauzerinizdə `https://localhost:8043` (və ya təyin etdiyiniz IP/port) ünvanına daxil olun. Sizi qarşılayan quraşdırma sihirbazı (Installation Wizard) aşağıdakı addımlarla kömək edəcək:
 
 | **1. Xoş Gəldiniz və Lisenziya** | **2. Sistem Tələblərinin Yoxlanışı** |
 | :---: | :---: |
