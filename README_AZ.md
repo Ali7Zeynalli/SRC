@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/Docker-Hazır-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
+[![Repo Size](https://img.shields.io/github/repo-size/Ali7Zeynalli/SRC?color=orange&logo=github)](https://github.com/Ali7Zeynalli/SRC)
 
 ![S-RCS Cover](www/PH/cover.png)
 
@@ -28,6 +29,11 @@ Sistemin təməlində **sürət və sadəlik** fəlsəfəsi dayanır: demək ola
 *   **🛡️ Təhlükəsiz və Güclü**: Təhlükəsizlik üzrə ən son standartlara uyğun qurulmuşdur. Active Directory şifrələrinin (credentials) təhlükəsizliyini təmin edir və bütün fəaliyyətlərin ətraflı auditini aparır.
 
 ## 📦 Quraşdırma və Tənzimləmə
+
+> 📘 **Tam Quraşdırma Təlimatı**
+> 
+> Ətraflı, addım-ba-addım quraşdırma təlimatı (Docker, AD hazırlığı və şəkillərlə) üçün zəhmət olmasa baxın:
+> 👉 **[INSTALL_AZ.md](INSTALL_AZ.md)**
 
 S-RCS sistemini mühitinizdə işə salmaq üçün aşağıdakı sadə addımları izləyin.
 
@@ -302,6 +308,43 @@ Sistem səviyyəli bütün konfiqurasiyalar buradan idarə olunur:
 > **[NovusGate](https://github.com/Ali7Zeynalli/NovusGate)** — WireGuard® üzərində qurulmuş, özünüz host etdiyiniz VPN həllimizi istifadə edin. Evdən, səfərdən və ya uzaq ofislərdən S-RCS-ə **statik IP və port yönləndirməsi olmadan** təhlükəsiz qoşulun.
 > 
 > 👉 **[Uzaqdan Giriş Təlimatına Bax](REMOTE_ACCESS_AZ.md)**
+
+---
+
+## 🤝 Professional Dəstək / Enterprise Support
+
+> **Quraşdırma çətin gəlir?** Biz sizə kömək edə bilərik!
+
+Əgər bu təlimatda göstərilən addımları özünüz icra edə bilmirsinizsə və ya enterprise səviyyəsində tam dəstək lazımdırsa, bizə müraciət edə bilərsiniz:
+
+### Ödənişli Xidmətlər
+
+| Xidmət | Təsvir |
+|--------|--------|
+| 🛠️ **Tam Quraşdırma** | S-RCS-in sizin infrastrukturda tam quraşdırılması |
+| 🔧 **AD Konfiqurasiyası** | Certificate Services, LDAPS, Firewall konfiqurasiyası |
+| 📞 **Texniki Dəstək** | Problem həlli və davamlı dəstək |
+| 📚 **Təlim** | Komandanız üçün S-RCS istifadəsi təlimi |
+
+> 💰 **Qiymətləndirmə**: Xidmət haqqı görüləcək işin həcminə və mürəkkəbliyinə əsasən fərdi olaraq hesablanır. Pulsuz konsultasiya üçün bizimlə əlaqə saxlayın.
+
+### Əlaqə
+
+📧 **Email**: Ali.Z.Zeynalli@gmail.com  
+💼 **LinkedIn**: [linkedin.com/in/ali7zeynalli](https://linkedin.com/in/ali7zeynalli)  
+📱 **Telefon**: +49 152 2209 4631 (whatsapp)
+
+> 💼 Enterprise müştərilər üçün SLA (Service Level Agreement) ilə dəstək mövcuddur.
+
+### 🌍 Dəstək Verilən Dillər
+
+| Dil | Language |
+|-----|----------|
+| 🇦🇿 Azərbaycan | Azerbaijani |
+| 🇬🇧 İngilis | English |
+| 🇩🇪 Alman | German |
+| 🇷🇺 Rus | Russian |
+| 🇹🇷 Türk | Turkish |
 
 ---
 

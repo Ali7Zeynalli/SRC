@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
+[![Repo Size](https://img.shields.io/github/repo-size/Ali7Zeynalli/SRC?color=orange&logo=github)](https://github.com/Ali7Zeynalli/SRC)
 
 ![S-RCS Cover](www/PH/cover.png)
 
@@ -28,6 +29,11 @@ The system is built on a core philosophy of **speed and simplicity**: virtually 
 *   **🛡️ Secure & Robust**: Built with security best practices, ensuring safe handling of AD credentials and providing detailed activity logging.
 
 ## 📦 Installation & Setup
+
+> 📘 **Complete Installation Guide**
+> 
+> For a detailed, step-by-step installation guide (including Docker, AD setup, and screenshots), please see:
+> 👉 **[INSTALL_EN.md](INSTALL_EN.md)**
 
 Get S-RCS running securely in your environment with a few simple commands.
 
@@ -302,6 +308,43 @@ Manage all system-wide configurations, including:
 > Use **[NovusGate](https://github.com/Ali7Zeynalli/NovusGate)** — our self-hosted VPN solution built on WireGuard® to securely access S-RCS from home, travel, or remote offices **without static IP or port forwarding**.
 > 
 > 👉 **[View Remote Access Guide](REMOTE_ACCESS.md)**
+
+---
+
+## 🤝 Professional Support / Enterprise Support
+
+> **Finding installation difficult?** We can help!
+
+If you cannot perform the steps shown in this guide yourself or need full enterprise-level support, you can contact us:
+
+### Paid Services
+
+| Service | Description |
+|---------|-------------|
+| 🛠️ **Full Installation** | Complete installation of S-RCS in your infrastructure |
+| 🔧 **AD Configuration** | Certificate Services, LDAPS, Firewall configuration |
+| 📞 **Technical Support** | Problem resolution and ongoing support |
+| 📚 **Training** | S-RCS usage training for your team |
+
+> 💰 **Pricing**: Service fees are calculated individually based on the scope and complexity of work. Contact us for a free consultation.
+
+### Contact
+
+📧 **Email**: Ali.Z.Zeynalli@gmail.com  
+💼 **LinkedIn**: [linkedin.com/in/ali7zeynalli](https://linkedin.com/in/ali7zeynalli)  
+📱 **Phone**: +49 152 2209 4631 (WhatsApp)
+
+> 💼 SLA (Service Level Agreement) support is available for enterprise customers.
+
+### 🌍 Supported Languages
+
+| Language | Dil |
+|----------|-----|
+| 🇦🇿 Azerbaijani | Azərbaycan |
+| 🇬🇧 English | İngilis |
+| 🇩🇪 German | Alman |
+| 🇷🇺 Russian | Rus |
+| 🇹🇷 Turkish | Türk |
 
 ---
 
