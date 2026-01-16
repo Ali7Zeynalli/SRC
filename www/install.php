@@ -396,35 +396,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <!-- Section 3: Database Settings -->
+                    <?php
+                    // Read database settings from environment variables (set by Docker)
+                    $env_db_host = getenv('MYSQL_HOST') ?: 'mysql';
+                    $env_db_name = getenv('MYSQL_DATABASE') ?: 'ldap_auth';
+                    $env_db_user = getenv('MYSQL_USER') ?: 'srcs_admin';
+                    $env_db_pass = getenv('MYSQL_PASSWORD') ?: 'SrcS@2026!Secure';
+                    ?>
                     <div class="form-section" id="section3">
                         <form id="databaseSettingsForm" class="needs-validation" novalidate>
                             <!-- Database Settings -->
                             <h5 class="border-bottom pb-2">Database Settings</h5>
+                            <div class="alert alert-warning mb-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Important:</strong> These values are loaded from the <code>.env</code> file. 
+                                If you need to change them, please edit the <code>.env</code> file located in the project root directory 
+                                (same folder as <code>docker-compose.yml</code>) and restart the containers with <code>docker-compose up -d --build</code>.
+                            </div>
                             <div class="alert alert-info mb-3">
                                 <i class="fas fa-info-circle me-2"></i>
                                 <strong>Docker:</strong> Host = <code>mysql</code> | <strong>XAMPP:</strong> Host = <code>localhost</code>
                             </div>
-                            <div class="alert alert-warning mb-3">
-                                <i class="fas fa-cog me-2"></i>
-                                <strong>Özelleştirme:</strong> Bu değerleri özelleştirmek istiyorsanız, <code>.env</code> dosyasını düzenleyin (docker-compose.yml ile aynı klasörde).
-                            </div>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="db_host" class="form-label">Database Host</label>
-                                    <input type="text" class="form-control" id="db_host" value="mysql" required>
-                                    <div class="form-text">Docker: mysql | XAMPP: localhost</div>
+                                    <input type="text" class="form-control bg-light" id="db_host" value="<?php echo htmlspecialchars($env_db_host); ?>" readonly required>
+                                    <div class="form-text text-muted">Read-only - Edit .env file to change</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="db_name" class="form-label">Database Name</label>
-                                    <input type="text" class="form-control" id="db_name" value="ldap_auth" required>
+                                    <input type="text" class="form-control bg-light" id="db_name" value="<?php echo htmlspecialchars($env_db_name); ?>" readonly required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="db_user" class="form-label">Database Username</label>
-                                    <input type="text" class="form-control" id="db_user" value="srcs_admin" required>
+                                    <input type="text" class="form-control bg-light" id="db_user" value="<?php echo htmlspecialchars($env_db_user); ?>" readonly required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="db_pass" class="form-label">Database Password</label>
-                                    <input type="password" class="form-control" id="db_pass" value="SrcS@2026!Secure" required>
+                                    <input type="password" class="form-control bg-light" id="db_pass" value="<?php echo htmlspecialchars($env_db_pass); ?>" readonly required>
                                 </div>
                             </div>
                         </form>

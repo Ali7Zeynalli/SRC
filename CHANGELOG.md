@@ -4,6 +4,17 @@ All notable changes to S-RCS will be documented in this file.
 
 ---
 
+## [1.3.0] - 2026-01-16
+
+### 🔧 Improvements
+- ⚙️ **Installer: Environment-Based Configuration**
+  - Database settings now auto-loaded from `.env` file via Docker environment variables
+  - Database input fields are now read-only in installer
+  - Added warning message instructing users to edit `.env` file before installation
+  - Improved security by centralizing credential management in `.env`
+
+---
+
 ## [1.3.0] - 2026-01-15
 
 ### ✨ New Features

@@ -4,6 +4,17 @@ S-RCS üzərindəki bütün əhəmiyyətli dəyişikliklər bu faylda sənədlə
 
 ---
 
+## [1.3.0] - 2026-01-16
+
+### 🔧 Təkmilləşdirmələr
+- ⚙️ **Installer: Ətraf Mühit Əsaslı Konfiqurasiya**
+  - Database parametrləri indi `.env` faylından Docker mühit dəyişənləri vasitəsilə avtomatik yüklənir
+  - Installer-də database input sahələri artıq yalnız oxunur (read-only)
+  - İstifadəçilərə quraşdırmadan əvvəl `.env` faylını düzəltmələri barədə xəbərdarlıq əlavə edildi
+  - Credential idarəetməsinin `.env`-də mərkəzləşdirilməsi ilə təhlükəsizlik yaxşılaşdırıldı
+
+---
+
 ## [1.3.0] - 2026-01-15
 
 ### ✨ Yeni Xüsusiyyətlər
