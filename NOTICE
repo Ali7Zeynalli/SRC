@@ -1,0 +1,45 @@
+S-RCS (Server Reporting and Controlling System)
+Copyright 2025 Ali Zeynalli
+
+This product includes software developed by Ali Zeynalli.
+
+================================================================================
+
+ORIGINAL AUTHOR AND MAINTAINER
+==============================
+Ali Zeynalli
+Email: Ali.Z.Zeynalli@gmail.com
+GitHub: https://github.com/Ali7Zeynalli
+LinkedIn: https://linkedin.com/in/ali7zeynalli
+
+================================================================================
+
+PROJECT INFORMATION
+===================
+S-RCS is a comprehensive web-based portal designed to revolutionize 
+Windows Active Directory management. By moving administration from the 
+traditional interface to a streamlined web platform, S-RCS significantly 
+reduces time loss and enhances operational efficiency.
+
+Repository: https://github.com/Ali7Zeynalli/SRC
+
+================================================================================
+
+ATTRIBUTION REQUIREMENTS
+========================
+When redistributing this software or derivative works, you must:
+
+1. Retain this NOTICE file in its entirety
+2. Include the original LICENSE file
+3. Clearly indicate any modifications made to the original work
+4. Give appropriate credit to the original author
+
+================================================================================
+
+THIRD-PARTY COMPONENTS
+======================
+This software may include third-party open source components, each with 
+their own licenses. Please refer to the individual component licenses 
+for more information.
+
+================================================================================

@@ -1,7 +1,7 @@
 # S-RCS (Server Reporting and Controlling System)
 
 [![GitHub stars](https://img.shields.io/github/stars/Ali7Zeynalli/SRC?style=social)](https://github.com/Ali7Zeynalli/SRC/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Lisenziya](https://img.shields.io/badge/Lisenziya-Apache_2.0-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/Docker-Hazır-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
 [![Repo Size](https://img.shields.io/github/repo-size/Ali7Zeynalli/SRC?color=orange&logo=github)](https://github.com/Ali7Zeynalli/SRC)
@@ -348,12 +348,21 @@ Sistem səviyyəli bütün konfiqurasiyalar buradan idarə olunur:
 
 ---
 
-### ⚠️ Lisenziya və İmtina (Disclaimer)
+### 📄 Lisenziya
 
-**© 2025 Əli Zeynallı. Bütün Hüquqlar Qorunur.**
+Bu layihə **Apache License 2.0** altında lisenziyalanıb - ətraflı məlumat üçün [LICENSE](LICENSE) faylına baxın.
 
-**S-RCS (Server Reporting and Controlling System)** yalnız **Əli Zeynallı**-nın əqli mülkiyyətidir.
+**© 2025 Əli Zeynallı**
 
-*   Bu proqram təminatı standart istifadə üçün **PULSUZDUR** və **SATILMIR**.
-*   **Lisenziya Haqqı Yoxdur**: Sistemi sərbəst şəkildə yükləyə, quraşdıra və istifadə edə bilərsiniz.
-*   **Dəstək Xidmətləri**: Ödəniş yalnız tələb olunduqda **peşəkar quraşdırma dəstəyi** və **təlim sessiyaları** üçün tətbiq olunur.
+Apache 2.0 Lisenziyası sizə imkan verir:
+- ✅ Proqramı istənilən məqsəd üçün istifadə etmək (kommersiya daxil)
+- ✅ Proqramı dəyişdirmək və paylamaq
+- ✅ Töhfə edənlərin patent iddialarından istifadə etmək
+
+Sizdən tələb olunur:
+- 📋 Orijinal müəllif hüququ qeydini saxlamaq
+- 📋 LICENSE və NOTICE fayllarını daxil etmək
+- 📋 Proqrama edilən əhəmiyyətli dəyişiklikləri qeyd etmək
+- 📋 Orijinal müəllifə istinad vermək
+
+> 📜 Attribution tələbləri üçün [NOTICE](NOTICE) faylına baxın.

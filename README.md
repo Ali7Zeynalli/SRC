@@ -1,7 +1,7 @@
 # S-RCS (Server Reporting and Controlling System)
 
 [![GitHub stars](https://img.shields.io/github/stars/Ali7Zeynalli/SRC?style=social)](https://github.com/Ali7Zeynalli/SRC/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
 [![Repo Size](https://img.shields.io/github/repo-size/Ali7Zeynalli/SRC?color=orange&logo=github)](https://github.com/Ali7Zeynalli/SRC)
@@ -348,12 +348,21 @@ If you cannot perform the steps shown in this guide yourself or need full enterp
 
 ---
 
-### ⚠️ License & Disclaimer
+### 📄 License
 
-**© 2025 Ali Zeynalli. All Rights Reserved.**
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
 
-**S-RCS (Server Reporting and Controlling System)** is the sole intellectual property of **Ali Zeynalli**.
+**© 2025 Ali Zeynalli**
 
-*   This software is **FREE** for standard usage and is **NOT FOR SALE**.
-*   **No License Fees**: You can download, install, and use this system freely.
-*   **Support Services**: Fees are only applicable for **professional installation assistance** and **training sessions** if requested.
+The Apache 2.0 License allows you to:
+- ✅ Use the software for any purpose (including commercial)
+- ✅ Modify and distribute the software
+- ✅ Use patent claims of contributors
+
+While requiring you to:
+- 📋 Include the original copyright notice
+- 📋 Include the LICENSE and NOTICE files
+- 📋 State significant changes made to the software
+- 📋 Provide attribution to the original author
+
+> 📜 See [NOTICE](NOTICE) file for attribution requirements.
