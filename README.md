@@ -5,12 +5,15 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
 [![Repo Size](https://img.shields.io/github/repo-size/Ali7Zeynalli/SRC?color=orange&logo=github)](https://github.com/Ali7Zeynalli/SRC)
+[![Website](https://img.shields.io/badge/Website-Visit%20Documentation-2ea44f?logo=google-chrome&logoColor=white)](https://ali7zeynalli.github.io/S-RCS-Website/)
 
 ![S-RCS Cover](www/PH/cover.png)
 
 ## 🌟 Introduction
 
 **S-RCS** is a comprehensive web-based portal designed to revolutionize Windows Active Directory management. By moving administration from the traditional interface to a streamlined web platform, S-RCS significantly reduces time loss and enhances operational efficiency.
+
+> 🌐 **Visit the Official Website & Documentation:** [Ali7Zeynalli.github.io/S-RCS-Website](https://ali7zeynalli.github.io/S-RCS-Website/)
 
 The system is built on a core philosophy of **speed and simplicity**: virtually every administrative task—from creating Users, Groups, and Organizational Units (OUs) to managing complex assignments—can be completed in just **3 clicks**.
 

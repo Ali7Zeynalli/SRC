@@ -5,12 +5,15 @@
 [![Docker](https://img.shields.io/badge/Docker-Hazır-2496ED.svg?logo=docker)](https://www.docker.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20AD-0078D6.svg?logo=windows)](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
 [![Repo Size](https://img.shields.io/github/repo-size/Ali7Zeynalli/SRC?color=orange&logo=github)](https://github.com/Ali7Zeynalli/SRC)
+[![Vebsayt](https://img.shields.io/badge/Vebsayt-Sənədlər-2ea44f?logo=google-chrome&logoColor=white)](https://ali7zeynalli.github.io/S-RCS-Website/)
 
 ![S-RCS Cover](www/PH/cover.png)
 
 ## 🌟 Təqdimat
 
 **S-RCS** (Server Reporting and Controlling System), Windows Active Directory idarəetməsini inqilabi şəkildə dəyişdirmək üçün hazırlanmış, geniş imkanlara malik veb əsaslı bir portaldır. İdarəetməni ənənəvi, çətin interfeyslərdən çıxararaq sadələşdirilmiş və müasir veb platformaya daşıyan S-RCS, vaxt itkisini əhəmiyyətli dərəcədə azaldır və əməliyyat səmərəliliyini artırır.
+
+> 🌐 **Rəsmi Vebsayt və Sənədlər:** [Ali7Zeynalli.github.io/S-RCS-Website](https://ali7zeynalli.github.io/S-RCS-Website/)
 
 Sistemin təməlində **sürət və sadəlik** fəlsəfəsi dayanır: demək olar ki, hər bir inzibati tapşırıq — İstifadıçilər (Users), Qruplar (Groups) və Təşkilati Vahidlərin (OU) yaradılmasından tutmuş, mürəkkəb təyinatlara qədər — cəmi **3 kliklə** yerinə yetirilə bilər.
 
