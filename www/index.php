@@ -31,6 +31,12 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload'
 
 // System checker removed for Open Source version
 
+// Check if system is installed - redirect to installer if not
+if (!file_exists(__DIR__ . '/config/.installed')) {
+    header('Location: install.php');
+    exit();
+}
+
 // Check if install.php or installer.php exists - redirect to uninstall to archive them
 // REMOVED: Automatic redirection to uninstall.php is disabled.
 // The system now relies on config/.installed check in install.php
