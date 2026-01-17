@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Discussion
+    url: https://github.com/Ali7Zeynalli/SRC/discussions
+    about: Have a question or want to discuss something? Use GitHub Discussions.
+  - name: 📧 Email Support
+    url: mailto:Ali.Z.Zeynalli@gmail.com
+    about: For professional support or custom solutions, contact via email.
+  - name: 💼 LinkedIn
+    url: https://linkedin.com/in/ali7zeynalli
+    about: Connect on LinkedIn for professional inquiries.
