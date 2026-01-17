@@ -346,35 +346,25 @@ Review all settings and click **Start Installation**.
 When installation is complete:
 - **License Key** will be displayed (save it!)
 
-### Step 6: Archive Installation Files (Uninstall Wizard)
+### Step 6: Security Lock
 
-After successful installation, the **Uninstall Wizard** page will appear. This doesn't **delete** the installer files, it **archives** them to the `_archive` folder.
+After successful installation, the system is automatically locked to prevent unauthorized access to the installer.
 
-> 🔐 **Why is this necessary?**
+![Security Lock Screen](www/PH/6.png)
+
+> 🔐 **Security Notice**
 > 
-> For security reasons, installer files should not remain on a production system. Otherwise:
-> - Someone could access install.php again
-> - The system could be reconfigured
-> - A security risk could arise
+> The installer is now locked. If you try to access `install.php` again, you will see the "System Locked" screen shown above.
 
-**Files to be archived:**
+**How to Reinstall (Unlock):**
 
-| File | Description |
-|------|-------------|
-| `install.php` | Installation wizard UI |
-| `installer.php` | Backend installation operations |
-| `preinstall.php` | Pre-checks |
-| `install.sql` | SQL scripts |
-| `uninstall.php` | Archive utility (archives itself too) |
+If you need to run the installation wizard again, you must manually delete the lock file from the server:
 
-**How it works:**
+1. Go to your project folder
+2. Navigate to `www/config/`
+3. Delete the `.installed` file
 
-1. Type **"UNINSTALL"** (in capital letters)
-2. Click the **Archive Files** button
-3. Files will be moved to `www/_archive/`
-4. You will be automatically redirected to the **Login** page
-
-> 💡 **Need to reinstall?** Move the files from the `_archive` folder back to the `www/` folder.
+After deleting this file, you can access the installer again.
 
 ---
 

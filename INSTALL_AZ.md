@@ -347,35 +347,25 @@ Bütün parametrləri yoxlayın və **Start Installation** basın.
 Quraşdırma tamamlandıqda:
 - **License Key** göstəriləcək (saxlayın!)
 
-### Addım 6: Installer Fayllarının Arxivləşdirilməsi (Uninstall Wizard)
+### Addım 6: Təhlükəsizlik Kilidi (Security Lock)
 
-Quraşdırma uğurla tamamlandıqdan sonra **Uninstall Wizard** səhifəsi görünəcək. Bu, installer fayllarını **silmir**, onları `_archive` qovluğuna **arxivləyir**.
+Quraşdırma uğurla tamamlandıqdan sonra, sistem installerə icazəsiz girişin qarşısını almaq üçün avtomatik olaraq kilidlənir.
 
-> 🔐 **Niyə lazımdır?**
+![Təhlükəsizlik Kilidi Ekranı](www/PH/6.png)
+
+> 🔐 **Təhlükəsizlik Bildirişi**
 > 
-> Təhlükəsizlik səbəblərinə görə installer faylları production sistemdə qalmamalıdır. Əks halda:
-> - Kimsə yenidən install.php-ə daxil ola bilər
-> - Sistem yenidən konfiqurasiya edilə bilər
-> - Təhlükəsizlik riski yarana bilər
+> Installer artıq kilidlənib. Əgər yenidən `install.php`-ə daxil olmağa çalışsanız, yuxarıdakı "System Locked" ekranını görəcəksiniz.
 
-**Arxivlənən fayllar:**
+**Yenidən Quraşdırmaq (Kilidi Açmaq) üçün:**
 
-| Fayl | Təsvir |
-|------|--------|
-| `install.php` | Quraşdırma sehrbazının UI hissəsi |
-| `installer.php` | Backend quraşdırma əməliyyatları |
-| `preinstall.php` | Ön yoxlamalar |
-| `install.sql` | SQL skriptləri |
-| `uninstall.php` | Arxivləşdirmə utility-si (özünü də arxivləyir) |
+Əgər quraşdırma sehrbazını yenidən işə salmaq istəyirsinizsə, kilid faylını serverdən əl ilə silməlisiniz:
 
-**Necə işləyir:**
+1. Proyekt qovluğuna daxil olun
+2. `www/config/` qovluğuna keçin
+3. `.installed` faylını silin
 
-1. **"UNINSTALL"** yazın (böyük hərflərlə)
-2. **Archive Files** düyməsinə basın
-3. Fayllar `www/_archive/` qovluğuna köçürüləcək
-4. Avtomatik **Login** səhifəsinə yönləndiriləcəksiniz
-
-> 💡 **Yenidən quraşdırma lazımdırsa?** `_archive` qovluğundan faylları geri `www/` qovluğuna köçürün.
+Bu faylı sildikdən sonra installerə yenidən daxil ola bilərsiniz.
 
 ---
 

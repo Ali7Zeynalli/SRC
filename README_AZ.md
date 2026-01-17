@@ -113,20 +113,20 @@ Quraşdırmadan sonra sistemə aşağıdakı ünvanlardan daxil olun:
 ### 5. Vizuallaşdırılmış Quraşdırma Sihirbazı
 Konteynerlər işə düşdükdən sonra brauzerinizdə `https://localhost:8043` (və ya təyin etdiyiniz IP/port) ünvanına daxil olun. Sizi qarşılayan quraşdırma sihirbazı (Installation Wizard) aşağıdakı addımlarla kömək edəcək:
 
-| **1. Xoş Gəldiniz və Lisenziya** | **2. Sistem Tələblərinin Yoxlanışı** |
+| **1. Sistem Tələbləri** | **2. Server Məlumatları** |
 | :---: | :---: |
-| ![Welcome Screen](www/PH/1.png) | ![Requirements Check](www/PH/2.png) |
-| *Şərtləri qəbul edin və başlayın* | *Server mühitinin uyğunluğunu yoxlayır* |
+| ![System Requirements](www/PH/1.png) | ![Server Information](www/PH/2.png) |
+| *Sistem mühitinin yoxlanışı* | *Domain və Server detalları* |
 
-| **3. Verilənlər Bazasının (DB) Tənzimlənməsi** | **4. Administrator Hesabı** |
+| **3. Verilənlər Bazası** | **4. Təsdiqləmə** |
 | :---: | :---: |
-| ![Database Setup](www/PH/3.png) | ![Admin Account](www/PH/4.png) |
-| *MySQL bazasına qoşulma* | *Sistem üçün yerli admin yaradın* |
+| ![Database](www/PH/3.png) | ![Confirmation](www/PH/4.png) |
+| *Baza bağlantısı* | *Tənzimləmələrin yoxlanışı* |
 
-| **5. Active Directory Bağlantısı** | **6. Tamamlanma** |
+| **5. Quraşdırma Uğurlu** | **6. Sistem Kilidlənib** |
 | :---: | :---: |
-| ![AD Config](www/PH/5.png) | ![Finish](www/PH/6.png) |
-| *LDAP əlaqə məlumatları* | *Quraşdırma bitdi!* |
+| ![Success](www/PH/5.png) | ![System Locked](www/PH/6.png) |
+| *Quraşdırma bitdi* | 🔒 *Sistem avtomatik kilidlənir* |
 
 Artıq sisteminiz hazırdır və Active Directory mühitinizi idarə etməyə başlaya bilərsiniz.
 

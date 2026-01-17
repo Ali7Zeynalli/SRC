@@ -12,6 +12,10 @@ All notable changes to S-RCS will be documented in this file.
   - Database input fields are now read-only in installer
   - Added warning message instructing users to edit `.env` file before installation
   - Improved security by centralizing credential management in `.env`
+- 🔒 **New Security Lock Mechanism**
+  - Replaced the mandatory "Uninstall Wizard" with a file-based lock system (`.installed`)
+  - Prevents accidental re-installation without needing to archive files
+  - "System Locked" screen appears if installer is accessed after installation
 
 ---
 

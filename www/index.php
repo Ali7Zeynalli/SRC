@@ -32,12 +32,16 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload'
 // System checker removed for Open Source version
 
 // Check if install.php or installer.php exists - redirect to uninstall to archive them
+// REMOVED: Automatic redirection to uninstall.php is disabled.
+// The system now relies on config/.installed check in install.php
+/*
 if (file_exists(__DIR__ . '/install.php') || file_exists(__DIR__ . '/installer.php')) {
     if (basename($_SERVER['PHP_SELF']) !== 'uninstall.php') {
         header('Location: uninstall.php');
         exit();
     }
 }
+*/
 
 // Load config
 $config = require(__DIR__ . '/config/config.php');

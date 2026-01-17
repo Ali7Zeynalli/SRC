@@ -25,8 +25,76 @@ if (is_dir($languages_dir)) {
 
 // Check if system is already installed
 if (file_exists(__DIR__ . '/config/.installed')) {
-    header('Location: uninstall.php');
-    exit;
+    // Security Lock Message
+    die('
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BSOY Security Lock</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <style>
+            body { 
+                background: linear-gradient(135deg, #f8f9fc 0%, #dee2e6 100%);
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+            .lock-card {
+                background: white;
+                padding: 3rem;
+                border-radius: 1rem;
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                text-align: center;
+                max-width: 500px;
+                width: 90%;
+            }
+            .lock-icon {
+                font-size: 4rem;
+                color: #e74a3b;
+                margin-bottom: 1.5rem;
+            }
+            .btn-home {
+                background-color: #4e73df;
+                border-color: #4e73df;
+                color: white;
+                padding: 0.75rem 1.5rem;
+                text-decoration: none;
+                border-radius: 0.35rem;
+                transition: all 0.2s;
+                display: inline-block;
+                margin-top: 1.5rem;
+            }
+            .btn-home:hover {
+                background-color: #2e59d9;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="lock-card">
+            <i class="fas fa-lock lock-icon"></i>
+            <h2 class="mb-3">System Locked</h2>
+            <div class="alert alert-warning">
+                <p class="mb-0"><strong>Security Notice:</strong> The system is already installed.</p>
+            </div>
+            <p class="text-muted mb-4">
+                To prevent accidental data loss or unauthorized reconfiguration, the installer has been locked.
+            </p>
+            <p class="small text-muted mb-0">
+                To reinstall: Manually delete the <code>config/.installed</code> file from your server.
+            </p>
+            <a href="index.php" class="btn-home">
+                <i class="fas fa-home me-2"></i>Go to Dashboard
+            </a>
+        </div>
+    </body>
+    </html>
+    ');
 }
 
 error_reporting(E_ALL);

@@ -12,6 +12,10 @@ S-RCS üzərindəki bütün əhəmiyyətli dəyişikliklər bu faylda sənədlə
   - Installer-də database input sahələri artıq yalnız oxunur (read-only)
   - İstifadəçilərə quraşdırmadan əvvəl `.env` faylını düzəltmələri barədə xəbərdarlıq əlavə edildi
   - Credential idarəetməsinin `.env`-də mərkəzləşdirilməsi ilə təhlükəsizlik yaxşılaşdırıldı
+- 🔒 **Yeni Təhlükəsizlik Kilidi (Security Lock)**
+  - Məcburi "Uninstall Wizard" sistemi fayl əsaslı kilid sistemi (`.installed`) ilə əvəz olundu
+  - Faylları arxivləmədən təkrar quraşdırmanın qarşısını alır
+  - Quraşdırmadan sonra installerə girilərsə "System Locked" ekranı göstərilir
 
 ---
 

@@ -113,20 +113,20 @@ After deployment, access the system via:
 ### 5. Visual Installation Wizard
 Once the containers are running, navigate to `https://localhost:8043` (or your configured port). The comprehensive installation wizard will guide you through the setup process:
 
-| **1. Welcome & License** | **2. System Requirements** |
+| **1. System Requirements** | **2. Server Information** |
 | :---: | :---: |
-| ![Welcome Screen](www/PH/1.png) | ![Requirements Check](www/PH/2.png) |
-| *Accept terms and start* | *Validates server environment* |
+| ![System Requirements](www/PH/1.png) | ![Server Information](www/PH/2.png) |
+| *Validates server environment* | *Domain & Server Details* |
 
-| **3. Database Configuration** | **4. Administrator Setup** |
+| **3. Database** | **4. Confirmation** |
 | :---: | :---: |
-| ![Database Setup](www/PH/3.png) | ![Admin Account](www/PH/4.png) |
-| *Create local admin* |
+| ![Database](www/PH/3.png) | ![Confirmation](www/PH/4.png) |
+| *Database Connection* | *Review Settings* |
 
-| **5. Active Directory** | **6. Completion** |
+| **5. Installation Successful** | **6. System Locked** |
 | :---: | :---: |
-| ![AD Config](www/PH/5.png) | ![Finish](www/PH/6.png) |
-| *LDAP Connection Details* | *Setup Complete!* |
+| ![Success](www/PH/5.png) | ![System Locked](www/PH/6.png) |
+| *Setup Complete* | 🔒 *System locks automatically* |
 
 ## 🔐 Login & Dashboard
 
