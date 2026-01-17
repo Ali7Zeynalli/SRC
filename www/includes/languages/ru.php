@@ -78,6 +78,7 @@ $lang = [
     'footer_copyright' => '2025 Ali Zeynalli. Все права защищены.',
     'footer_contact' => 'Контакты',
     'footer_feedback' => 'Обратная связь',
+    'footer_docs' => 'Документация',
     'footer_version' => 'в',
     'footer_website' => 'Ali Zeynalli',
 

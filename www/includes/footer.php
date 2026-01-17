@@ -37,6 +37,11 @@ $version = $config['installation']['version'] ?? '1.0.0';
                         <i class="fas fa-comment-alt me-1"></i>
                         <?php echo __('footer_feedback'); ?>
                     </a>
+                    &nbsp; &nbsp;
+                    <a href="https://ali7zeynalli.github.io/SRCS/docs.html#intro" target="_blank" class="btn btn-outline-info btn-sm py-1 px-2">
+                        <i class="fas fa-book me-1"></i>
+                        <?php echo __('footer_docs'); ?>
+                    </a>
                 </div>
             </div>
             <div class="col-md-4 text-end">

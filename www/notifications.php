@@ -37,16 +37,10 @@ require_once('includes/header.php');
                     <?php echo __('notifications_title'); ?>
                 </h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" id="refreshBtn" class="btn btn-light border" onclick="refreshNotifications()">
-                            <i class="fas fa-sync-alt"></i>
-                            <span class="ms-1 d-none d-md-inline"><?php echo __('refresh'); ?></span>
-                        </button>
-                    </div>
-                    <div class="badge bg-primary">
-                        <i class="fas fa-plug me-1"></i>
-                        <?php echo __('api_status'); ?>: <span id="apiStatus"><?= !empty($notifications) ? __('active') : __('error') ?></span>
-                    </div>
+                    <button type="button" id="refreshBtn" class="btn btn-light border" onclick="refreshNotifications()">
+                        <i class="fas fa-sync-alt"></i>
+                        <span class="ms-1 d-none d-md-inline"><?php echo __('refresh'); ?></span>
+                    </button>
                 </div>
             </div>
 
@@ -71,24 +65,6 @@ require_once('includes/header.php');
     </div>
 </div>
 
-<!-- Notification Detail Modal -->
-<div class="modal fade" id="notificationModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fas fa-bell me-2 text-primary"></i>
-                    <?php echo __('notification_details'); ?>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body p-0">
-                <!-- Will be populated by JavaScript -->
-            </div>
-        </div>
-    </div>
-</div>
-
 
    <link rel="stylesheet" href="temp/css/notifications.css">
 
@@ -96,21 +72,13 @@ require_once('includes/header.php');
 <?php require_once('includes/footer.php'); ?>
 <script>
 function refreshNotifications() {
-    // Refresh button-u fırlatmağa başla
     const refreshBtn = document.getElementById('refreshBtn');
-    const apiStatus = document.getElementById('apiStatus');
     
     refreshBtn.disabled = true;
     refreshBtn.querySelector('i').classList.add('fa-spin');
     
-    // API Status-u yeniləmə vəziyyətinə keçir
-    apiStatus.textContent = '<?php echo __('refreshing'); ?>';
-    apiStatus.classList.add('refreshing');
-    
-    // Notifications container
     const container = document.querySelector('.notifications-wrapper');
     
-    // AJAX sorğusu
     fetch(window.location.href, {
         method: 'GET',
         headers: {
@@ -119,18 +87,14 @@ function refreshNotifications() {
     })
     .then(response => response.text())
     .then(html => {
-        // Temporary div yaradırıq
         const temp = document.createElement('div');
         temp.innerHTML = html;
         
-        // Yeni notifications-u əldə edirik
         const newNotifications = temp.querySelector('.notifications-wrapper');
         
         if (newNotifications) {
-            // Notifications-u yeniləyirik
             container.innerHTML = newNotifications.innerHTML;
             
-            // Uğurlu yeniləmə bildirişi
             Swal.fire({
                 title: '<?php echo __('updated'); ?>!',
                 text: '<?php echo __('notifications_refreshed'); ?>',
@@ -140,15 +104,10 @@ function refreshNotifications() {
                 position: 'top-end',
                 toast: true
             });
-            
-            // API Status-u yenilə
-            apiStatus.textContent = '<?php echo __('active'); ?>';
-            apiStatus.classList.remove('refreshing');
         }
     })
     .catch(error => {
         console.error('Refresh error:', error);
-        // Xəta bildirişi
         Swal.fire({
             title: '<?php echo __('error'); ?>!',
             text: '<?php echo __('error_refresh_notifications'); ?>',
@@ -158,13 +117,8 @@ function refreshNotifications() {
             position: 'top-end',
             toast: true
         });
-        
-        // API Status-u error-a keçir
-        apiStatus.textContent = '<?php echo __('error'); ?>';
-        apiStatus.classList.remove('refreshing');
     })
     .finally(() => {
-        // Refresh button-u normal vəziyyətə qaytar
         refreshBtn.disabled = false;
         refreshBtn.querySelector('i').classList.remove('fa-spin');
     });
