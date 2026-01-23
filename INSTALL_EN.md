@@ -223,6 +223,13 @@ sudo apt install -y docker.io docker-compose
 # Add user to docker group
 sudo usermod -aG docker $USER
 
+# ⚠️ IMPORTANT: Set permissions in the project folder
+cd /path/to/S-RCS    # Navigate to project folder
+sudo chmod -R 755 www/
+sudo chmod -R 777 www/config/
+sudo chmod -R 777 www/temp/
+sudo chown -R $USER:$USER .
+
 # Log out and log back in
 exit
 ```
@@ -236,6 +243,13 @@ exit
    ```bash
    docker --version
    docker-compose --version
+   ```
+5. **Set permissions** (in the project folder):
+   ```bash
+   cd /path/to/S-RCS    # Navigate to project folder
+   chmod -R 755 www/
+   chmod -R 777 www/config/
+   chmod -R 777 www/temp/
    ```
 
 ### Windows Server 2019/2022

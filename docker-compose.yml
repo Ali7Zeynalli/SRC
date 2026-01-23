@@ -1,30 +1,46 @@
+# =============================================================================
+# OPTIMIZED DOCKER COMPOSE - S-RCS Application
+# =============================================================================
+
 services:
-  # Apache/PHP service
+  # -------------------------------------------------------------------------
+  # Apache/PHP service - Optimized with build caching
+  # -------------------------------------------------------------------------
   apache:
     build:
       context: ./php
       dockerfile: Dockerfile
+      # Enable BuildKit for faster builds
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+    image: srcs-php-apache:latest  # Tag image for reuse
     container_name: php-apache
     ports:
       - "${HTTP_PORT:-8080}:80"
       - "${HTTPS_PORT:-8043}:443"
     volumes:
+      # Source code - bind mount (changes reflected immediately)
       - ./www:/var/www/html
-      - ./apache-config/000-default.conf:/etc/apache2/sites-available/000-default.conf
-      - ./php/php.ini:/usr/local/etc/php/php.ini
-      - ./certs:/etc/ssl/certs/server
+      # Config files - read-only for security
+      - ./apache-config/000-default.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - ./php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./certs:/etc/ssl/certs/server:ro
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_DATABASE=${MYSQL_DATABASE:-ldap_auth}
       - MYSQL_USER=${MYSQL_USER:-srcs_admin}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-SrcS@2026!Secure}
-    restart: always
+      - PHP_OPCACHE_ENABLE=1
+    restart: unless-stopped
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - app-network
 
-  # MySQL service
+  # -------------------------------------------------------------------------
+  # MySQL service - Optimized with health check
+  # -------------------------------------------------------------------------
   mysql:
     image: mysql:8.0
     container_name: mysql-db
@@ -36,14 +52,31 @@ services:
       MYSQL_USER: ${MYSQL_USER:-srcs_admin}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-SrcS@2026!Secure}
     volumes:
-      - ./mysql:/var/lib/mysql
-    restart: always
+      - mysql_data:/var/lib/mysql  # Named volume for better performance
+      - ./mysql:/docker-entrypoint-initdb.d:ro  # Init scripts if any
+    restart: unless-stopped
     networks:
       - app-network
+    # Health check for dependency management
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    # Performance tuning
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --innodb-buffer-pool-size=128M
+      --max-connections=100
 
+  # -------------------------------------------------------------------------
   # phpMyAdmin service
+  # -------------------------------------------------------------------------
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     container_name: php-myadmin
     ports:
       - "${PMA_PORT:-8081}:80"
@@ -51,15 +84,24 @@ services:
       PMA_HOST: mysql
       PMA_USER: ${MYSQL_USER:-srcs_admin}
       PMA_PASSWORD: ${MYSQL_PASSWORD:-SrcS@2026!Secure}
-    restart: always
+      UPLOAD_LIMIT: 64M
+    restart: unless-stopped
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - app-network
 
+# =============================================================================
+# Networks
+# =============================================================================
 networks:
   app-network:
     driver: bridge
 
+# =============================================================================
+# Volumes - Named volumes for persistence and performance
+# =============================================================================
 volumes:
   mysql_data:
+    driver: local

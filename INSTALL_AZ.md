@@ -225,6 +225,13 @@ sudo apt install -y docker.io docker-compose
 # İstifadəçini docker qrupuna əlavə edin
 sudo usermod -aG docker $USER
 
+# ⚠️ VACİB: Proyekt qovluğunda icazələri təyin edin
+cd /path/to/S-RCS    # Proyekt qovluğuna keçin
+sudo chmod -R 755 www/
+sudo chmod -R 777 www/config/
+sudo chmod -R 777 www/temp/
+sudo chown -R $USER:$USER .
+
 # Yenidən daxil olun (logout/login)
 exit
 ```
@@ -238,6 +245,14 @@ exit
    ```bash
    docker --version
    docker-compose --version
+   ```
+
+5. **İcazələri təyin edin** (proyekt qovluğunda):
+   ```bash
+   cd /path/to/S-RCS    # Proyekt qovluğuna keçin
+   chmod -R 755 www/
+   chmod -R 777 www/config/
+   chmod -R 777 www/temp/
    ```
 
 ### Windows Server 2019/2022
